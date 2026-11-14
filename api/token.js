@@ -25,7 +25,7 @@ export default async function handler(req, res) {
 
   try {
     const source = req.method === 'GET' ? req.query : req.body || {};
-    const { roomName, participantName, pwd } = source;
+    const { roomName, participantName, sandi, pwd } = source;
 
     if (!roomName || !participantName) {
       return res.status(400).json({
@@ -33,13 +33,19 @@ export default async function handler(req, res) {
       });
     }
 
-    // Validasi Sandi Gabung (Default: "yes")
-    const expectedPassword = (process.env.VTC_JOIN_PASSWORD || 'yes').trim().toLowerCase();
-    const providedPassword = String(pwd ?? 'yes').trim().toLowerCase();
-
-    if (providedPassword !== expectedPassword) {
+    const providedSandi = String(sandi ?? pwd ?? '').trim();
+    if (!providedSandi) {
       return res.status(401).json({
-        error: 'Sandi Gabung tidak valid. Harap masukkan sandi gabung yang benar.',
+        error: 'Sandi Gabung operasi wajib diisi.',
+      });
+    }
+
+    if (
+      process.env.VTC_JOIN_PASSWORD &&
+      providedSandi.toLowerCase() !== process.env.VTC_JOIN_PASSWORD.trim().toLowerCase()
+    ) {
+      return res.status(401).json({
+        error: 'Sandi Gabung tidak valid.',
       });
     }
 
@@ -81,7 +87,7 @@ export default async function handler(req, res) {
       participantName: cleanIdentity,
     });
   } catch (error) {
-    console.error('[TACTICAL VTC TOKEN ERROR]:', error);
+    console.error('[TACTICAL VIDCOMM TOKEN ERROR]:', error);
     return res.status(500).json({
       error: 'Gagal membuat AccessToken LiveKit dari livekit-server-sdk.',
       details: error instanceof Error ? error.message : 'Unknown error',
