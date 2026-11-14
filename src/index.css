@@ -1,0 +1,186 @@
+@import "tailwindcss";
+@import "@livekit/components-styles";
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100dvh;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #0b1528;
+    color: #bae6fd;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* ============================================================================
+ * ELEGANT LIGHT BLUE (SLEEK CORPORATE MILITARY) OVERRIDES FOR LIVEKIT
+ * Memastikan FULL SCREEN FIT (h-[100dvh] w-full overflow-hidden) tanpa scrollbar
+ * ============================================================================ */
+.lk-room-container,
+.lk-video-conference,
+.lk-video-conference-inner {
+  height: 100% !important;
+  max-height: 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  background: linear-gradient(180deg, #0f172a 0%, #0b1528 100%) !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.lk-focus-layout-wrapper,
+.lk-grid-layout-wrapper {
+  flex: 1 1 0% !important;
+  min-height: 0 !important;
+  height: 100% !important;
+  width: 100% !important;
+  overflow: hidden !important;
+  padding: 8px !important;
+}
+
+.lk-focus-layout,
+.lk-grid-layout {
+  height: 100% !important;
+  width: 100% !important;
+  gap: 10px !important;
+  overflow: hidden !important;
+}
+
+.lk-participant-tile {
+  border: 1px solid rgba(125, 211, 252, 0.3) !important;
+  border-radius: 10px !important;
+  background-color: #0f1d36 !important;
+  overflow: hidden !important;
+  position: relative !important;
+  box-shadow: 0 4px 20px rgba(2, 132, 199, 0.08) !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.lk-participant-tile.lk-speaking {
+  border-color: #38bdf8 !important;
+  box-shadow: inset 0 0 0 1px #38bdf8, 0 0 18px rgba(56, 189, 248, 0.3) !important;
+}
+
+.lk-participant-placeholder {
+  background: radial-gradient(circle at center, #172554 0%, #0f172a 100%) !important;
+  color: #7dd3fc !important;
+}
+
+.lk-participant-metadata {
+  background: rgba(15, 23, 42, 0.88) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(125, 211, 252, 0.35) !important;
+  border-radius: 6px !important;
+  padding: 4px 10px !important;
+  bottom: 8px !important;
+  left: 8px !important;
+  right: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+.lk-participant-name {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 0.74rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.05em !important;
+  color: #e0f2fe !important;
+  text-transform: uppercase !important;
+}
+
+/* Styling <ConnectionQualityIndicator /> asli dari @livekit/components-react */
+.lk-connection-quality {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 2px 5px !important;
+  border-radius: 4px !important;
+  background: rgba(15, 23, 42, 0.85) !important;
+}
+
+.lk-connection-quality[data-lk-quality="excellent"],
+.lk-connection-quality[data-lk-quality="good"] {
+  color: #38bdf8 !important;
+}
+
+.lk-connection-quality[data-lk-quality="poor"] {
+  color: #fbbf24 !important;
+}
+
+.lk-connection-quality[data-lk-quality="lost"] {
+  color: #f87171 !important;
+}
+
+.lk-control-bar {
+  flex-shrink: 0 !important;
+  height: auto !important;
+  min-height: 54px !important;
+  max-height: 66px !important;
+  padding: 6px 12px !important;
+  background-color: rgba(15, 23, 42, 0.95) !important;
+  border-top: 1px solid rgba(125, 211, 252, 0.22) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+}
+
+.lk-button {
+  background-color: #1e293b !important;
+  border: 1px solid rgba(125, 211, 252, 0.3) !important;
+  color: #e0f2fe !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.03em !important;
+  border-radius: 8px !important;
+  padding: 8px 12px !important;
+  min-height: 38px !important;
+  transition: all 0.15s ease !important;
+}
+
+.lk-button:hover {
+  background-color: #1e3a8a !important;
+  border-color: #7dd3fc !important;
+  color: #ffffff !important;
+}
+
+.lk-disconnect-button {
+  background-color: rgba(185, 28, 28, 0.85) !important;
+  border: 1px solid #f87171 !important;
+  color: #fee2e2 !important;
+  font-weight: 700 !important;
+}
+
+.lk-disconnect-button:hover {
+  background-color: #dc2626 !important;
+  color: #ffffff !important;
+}
+
+/* Sembunyikan tombol chat bawaan LiveKit ControlBar jika kita menggunakan panel Chat kustom terintegrasi */
+.lk-chat-toggle {
+  display: none !important;
+}
+
+/* Mode Hemat Bandwidth: Sembunyikan elemen video saat Voice-Only PTT diaktifkan */
+.low-bandwidth-active .lk-participant-tile video {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

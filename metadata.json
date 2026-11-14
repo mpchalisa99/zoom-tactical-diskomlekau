@@ -1,0 +1,11 @@
+{
+  "name": "zoom TACTICAL VTC DISKOMLEKAU",
+  "description": "Tactical Video Teleconference (VTC) Command \u0026 Platoon Communication System built with React, Tailwind CSS, and LiveKit WebRTC.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
